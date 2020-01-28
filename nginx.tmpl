@@ -210,6 +210,13 @@ server {
 	{{ end }}
 	access_log /var/log/nginx/access.log vhost;
 
+	 # To allow special characters in headers
+ 	ignore_invalid_headers off;
+
+ 	# Allow any size file to be uploaded.
+ 	# Set to a value such as 1000m; to restrict file size to a specific value
+ 	client_max_body_size 0;
+
 	{{ if eq $network_tag "internal" }}
 	# Only allow traffic from internal clients
 	include /etc/nginx/network_internal.conf;
@@ -307,6 +314,13 @@ server {
 	listen [::]:80 {{ $default_server }};
 	{{ end }}
 	access_log /var/log/nginx/access.log vhost;
+
+	# To allow special characters in headers
+ 	ignore_invalid_headers off;
+
+ 	# Allow any size file to be uploaded.
+ 	# Set to a value such as 1000m; to restrict file size to a specific value
+ 	client_max_body_size 0;
 
 	{{ if eq $network_tag "internal" }}
 	# Only allow traffic from internal clients
